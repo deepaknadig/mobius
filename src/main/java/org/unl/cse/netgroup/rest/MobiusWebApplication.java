@@ -13,21 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.unl.cse.netgroup;
 
-import org.apache.karaf.shell.commands.Command;
-import org.onosproject.cli.AbstractShellCommand;
+package org.unl.cse.netgroup.rest;
+
+import org.onlab.rest.AbstractWebApplication;
+
+import java.util.Set;
 
 /**
- * Sample Apache Karaf CLI command
+ * Sample REST API web application.
  */
-@Command(scope = "mobius", name = "info",
-         description = "Mobius CLI command sample")
-public class AppCommand extends AbstractShellCommand {
-
+public class MobiusWebApplication extends AbstractWebApplication {
     @Override
-    protected void execute() {
-        print("Welcome to %s", "Mobius");
+    public Set<Class<?>> getClasses() {
+        return getClasses(MobiusWebResource.class);
     }
-
 }

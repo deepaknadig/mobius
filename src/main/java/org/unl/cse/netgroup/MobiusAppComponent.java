@@ -26,18 +26,18 @@ import org.slf4j.LoggerFactory;
  * Skeletal ONOS application component.
  */
 @Component(immediate = true)
-public class AppComponent {
+public class MobiusAppComponent {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     @Activate
     protected void activate() {
-        log.info("Started");
+        log.info("Started Mobius Application");
     }
 
     @Deactivate
     protected void deactivate() {
-        log.info("Stopped");
+        log.info("Stopped Mobius Application");
     }
 
 }

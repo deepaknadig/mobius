@@ -13,22 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.unl.cse.netgroup;
+package org.unl.cse.netgroup.rest;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.onosproject.rest.AbstractWebResource;
+import org.unl.cse.netgroup.NDNInfo;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 import static org.onlab.util.Tools.nullIsNotFound;
 
 /**
  * Sample web resource.
  */
-@Path("info")
-public class AppWebResource extends AbstractWebResource {
+@Path("mobius")
+public class MobiusWebResource extends AbstractWebResource {
 
     /**
      * Get hello world greeting.
@@ -36,10 +41,30 @@ public class AppWebResource extends AbstractWebResource {
      * @return 200 OK
      */
     @GET
-    @Path("")
+    @Path("info")
     public Response getGreeting() {
         ObjectNode node = mapper().createObjectNode().put("hello", "world");
         return ok(node).build();
+    }
+
+    private NDNInfo JsonToNDNInfo(InputStream stream) {
+        JsonNode jsonNode;
+        try {
+            jsonNode = mapper().readTree(stream);
+        } catch (IOException e) {
+            throw new IllegalArgumentException("Unable to parse the Mobius NDN POST.");
+        }
+
+        String interestFileResource = jsonNode.path("interestFileResource").asText(null);
+        String interestSrc = jsonNode.path("interestSrc").asText(null);
+        String interestDst = jsonNode.path("interestDst").asText(null);
+
+        if (interestFileResource != null && interestSrc != null && interestDst != null) {
+            return new NDNInfo(interestFileResource, interestSrc, interestDst);
+        } else {
+            throw new IllegalArgumentException("Arguments cannot be null.");
+        }
+
     }
 
 }
