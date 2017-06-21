@@ -56,18 +56,27 @@ public class MobiusWebResource extends AbstractWebResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response ndnPostInfo(InputStream stream) throws IOException {
-        // TODO Exception Handling
-//        try {
-//            ObjectNode jsonTree = (ObjectNode) mapper().readTree(stream);
-//        } catch (IOException e) {
-//            throw new IllegalArgumentException(e);
-//        }
-
         ndnInfo = JsonToNDNInfo(stream);
         ndnInfo.logInfo();
 
-        return Response.ok(root).build();
+        String msg = "Message";
+        return Response.accepted().build();
     }
+
+    @GET
+    @Path("ndn")
+    public Response getNdnInfo() {
+        ObjectNode root = mapper().createObjectNode();
+
+        root.put("Name", ndnInfo.getName());
+        root.put("FileResource", ndnInfo.getInterestFileResource());
+        root.put("SrcIP", ndnInfo.getInterestSrc());
+        root.put("DstIP", ndnInfo.getInterestDst());
+
+        return ok(root).build();
+    }
+
+
 
     private NDNInfo JsonToNDNInfo(InputStream stream) {
         JsonNode jsonNode;

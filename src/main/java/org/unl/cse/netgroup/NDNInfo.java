@@ -22,6 +22,22 @@ public class NDNInfo {
         this.interestDst = interestDst;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
+    public String getInterestFileResource() {
+        return this.interestFileResource;
+    }
+
+    public String getInterestSrc() {
+        return this.interestSrc;
+    }
+
+    public String getInterestDst() {
+        return this.interestDst;
+    }
+
     public void logInfo() {
         StringBuilder sb = new StringBuilder();
         sb.append("Name:" ).append(this.name).append(", ")
