@@ -28,7 +28,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <web.context>/onos/mobius</web.context>
         <api.description>Mobius REST API</api.description>
-        <onos.version>1.10.0-SNAPSHOT</onos.version>
+        <onos.version>1.10.0</onos.version>
         <api.version>1.0.0</api.version>
         <api.package>org.unl.cse.netgroup</api.package>
         <api.title>Mobius REST API</api.title>

@@ -23,11 +23,8 @@ import org.unl.cse.netgroup.NDNInfo;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
-
 import java.io.IOException;
 import java.io.InputStream;
-
-import static org.onlab.util.Tools.nullIsNotFound;
 
 /**
  * Sample web resource.
@@ -55,12 +52,13 @@ public class MobiusWebResource extends AbstractWebResource {
             throw new IllegalArgumentException("Unable to parse the Mobius NDN POST.");
         }
 
+        String name = jsonNode.path("name").asText(null);
         String interestFileResource = jsonNode.path("interestFileResource").asText(null);
         String interestSrc = jsonNode.path("interestSrc").asText(null);
         String interestDst = jsonNode.path("interestDst").asText(null);
 
-        if (interestFileResource != null && interestSrc != null && interestDst != null) {
-            return new NDNInfo(interestFileResource, interestSrc, interestDst);
+        if (name != null && interestFileResource != null && interestSrc != null && interestDst != null) {
+            return new NDNInfo(name, interestFileResource, interestSrc, interestDst);
         } else {
             throw new IllegalArgumentException("Arguments cannot be null.");
         }
