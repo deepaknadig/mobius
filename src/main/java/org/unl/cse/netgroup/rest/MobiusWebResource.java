@@ -18,6 +18,8 @@ package org.unl.cse.netgroup.rest;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.onosproject.rest.AbstractWebResource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.unl.cse.netgroup.NDNInfo;
 
 import javax.ws.rs.Consumes;
@@ -36,6 +38,7 @@ import java.io.InputStream;
 @Path("")
 public class MobiusWebResource extends AbstractWebResource {
 
+    private static Logger log = LoggerFactory.getLogger(MobiusWebResource.class);
     private static NDNInfo ndnInfo;
     private final ObjectNode root = mapper().createObjectNode();
 
@@ -60,18 +63,21 @@ public class MobiusWebResource extends AbstractWebResource {
         ndnInfo.logInfo();
 
         String msg = "Message";
-        return Response.accepted().build();
+        return Response.ok(root).build();
     }
 
     @GET
     @Path("ndn")
     public Response getNdnInfo() {
-        ObjectNode root = mapper().createObjectNode();
 
-        root.put("Name", ndnInfo.getName());
-        root.put("FileResource", ndnInfo.getInterestFileResource());
-        root.put("SrcIP", ndnInfo.getInterestSrc());
-        root.put("DstIP", ndnInfo.getInterestDst());
+        try {
+            root.put("Name", ndnInfo.getName());
+            root.put("FileResource", ndnInfo.getInterestFileResource());
+            root.put("SrcIP", ndnInfo.getInterestSrc());
+            root.put("DstIP", ndnInfo.getInterestDst());
+        }catch (NullPointerException e) {
+            throw new NullPointerException("Empty get() methods");
+        }
 
         return ok(root).build();
     }
@@ -91,6 +97,7 @@ public class MobiusWebResource extends AbstractWebResource {
         String interestSrc = jsonNode.path("interestSrc").asText(null);
         String interestDst = jsonNode.path("interestDst").asText(null);
 
+        log.info("Pinged!");
         if (name != null && interestFileResource != null && interestSrc != null && interestDst != null) {
             return new NDNInfo(name, interestFileResource, interestSrc, interestDst);
         } else {
