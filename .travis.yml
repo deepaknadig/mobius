@@ -10,7 +10,7 @@ before_install:
 - CID=$(docker run -d onosproject/onos)
 - docker ps -a
 - git clone https://git.deepaknadig.com/deepak/mobius.git
-- cd OpenSec
+- cd mobius
 - export ONOS_WEB_USER=onos
 - export ONOS_WEB_PASS=rocks
 - ifconfig

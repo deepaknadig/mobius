@@ -1,2 +1,1 @@
-Software Defined Networking (SDN) based control framework for Named Data Networking (NDN)
-------------------------------------------------------------------------------------------
+* Travis CI Builds: [![Build Status](https://travis-ci.org/deepaknadig/mobius.svg?branch=master)](https://travis-ci.org/deepaknadig/mobius)
