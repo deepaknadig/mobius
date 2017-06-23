@@ -1,0 +1,14 @@
+image: onosproject/onos
+
+#services:
+#  - onosproject/onos
+
+test:
+  script:
+  - sleep 15
+  - export ONOS_WEB_USER=onos
+  - export ONOS_WEB_PASS=rocks
+  - git clone https://git.deepaknadig.com/deepak/mobius.git
+  - cd mobius
+  - mvn clean install
+  - /root/onos/tools/dev/bin/onos-app onosproject__onos install! target/mobius-1.0.0.oar
