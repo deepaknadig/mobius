@@ -30,10 +30,10 @@
         <api.description>Mobius REST API</api.description>
         <onos.version>1.10.0</onos.version>
         <api.version>1.0.0</api.version>
-        <api.package>org.unl.cse.netgroup</api.package>
+        <api.package>org.unl.cse.netgroup.mobius</api.package>
         <api.title>Mobius REST API</api.title>
         <!-- Uncomment to generate ONOS app from this module.-->
-        <onos.app.name>org.unl.cse.netgroup</onos.app.name>
+        <onos.app.name>org.unl.cse.netgroup.mobius</onos.app.name>
         <onos.app.title>Mobius</onos.app.title>
         <onos.app.origin>University of Nebraska-Lincoln.</onos.app.origin>
         <onos.app.category>default</onos.app.category>
